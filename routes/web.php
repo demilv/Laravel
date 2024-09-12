@@ -30,7 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('resource', Resource::class);
+Route::get('/resource/create', [Resource::class, 'create']);
+Route::post('/resource', [Resource::class, 'store']);
 
 
 require __DIR__.'/auth.php';
