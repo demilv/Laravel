@@ -20,7 +20,7 @@ return new class extends Migration
             $table->dateTime('datetime');
             $table->boolean('paid')->default(false);
             $table->text('notes');
-            $table->interger('satisfaction')->default(null)->nullable();
+            $table->integer('satisfaction')->nullable()->default(null);
             $table->timestamps();
         });
     }

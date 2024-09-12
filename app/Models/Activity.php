@@ -9,18 +9,12 @@ class Activity extends Model
 {
     use HasFactory;
 
-    public function up(): void
-    {
-        Schema::create('flights', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('airline');
-            $table->timestamps();
-        });
-    }
- 
-    public function down(): void
-    {
-        Schema::drop('flights');
-    }
+    protected $fillable = [
+        'type',
+        'user_id',
+        'datetime',
+        'paid',
+        'notes',
+        'satisfaction',
+    ];
 }
