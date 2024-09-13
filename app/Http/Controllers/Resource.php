@@ -14,7 +14,10 @@ class Resource extends Controller
      */
     public function index()
     {
-            return "soy resource";
+        $activities = Activity::all();
+
+        return response()->json($activities);
+    
     }
 
     /**
@@ -22,7 +25,7 @@ class Resource extends Controller
      */
     public function create(): View
     {
-        return view('resource.create');
+        return View::make('createactivity');
     }
 
     /**
@@ -41,7 +44,7 @@ class Resource extends Controller
 
         $activity = Activity::create($validated);
 
-        return redirect()->route('resource')->with('success', 'Creaste una nueva actividad!');
+        return redirect()->route('resource.index')->with('success', 'Creaste una nueva actividad!');
     }
 
     /**
@@ -49,7 +52,7 @@ class Resource extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -57,8 +60,8 @@ class Resource extends Controller
      */
     public function edit(string $id)
     {
-            //
-    }
+        $activity = Activity::findOrFail($id); 
+        return view('editActivity', compact('activity'));    }
 
     /**
      * Update the specified resource in storage.
@@ -74,11 +77,10 @@ class Resource extends Controller
             'satisfaction' => 'nullable|integer|between:1,10',
         ]);
 
-        // Buscar la actividad por su id y actualizarla
         $activity = Activity::findOrFail($id);
         $activity->update($validated);
 
-        return redirect()->route('resource')->with('success', 'Editaste una actividad!');
+        return redirect()->route('resource.index')->with('success', 'Editaste una actividad!');
     }
 
     /**
@@ -89,7 +91,7 @@ class Resource extends Controller
         $activity = Activity::findOrFail($id);
         $activity->delete();
 
-        return redirect()->route('resource')->with('success', 'Eliminaste una actividad!');
+        return redirect()->route('resource.index')->with('success', 'Eliminaste una actividad!');
 
     }
 }
