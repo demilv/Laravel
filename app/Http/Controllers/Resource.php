@@ -16,8 +16,7 @@ class Resource extends Controller
     {
         $activities = Activity::all();
 
-        return response()->json($activities);
-    
+        return response()->json($activities);    
     }
 
     /**
@@ -25,7 +24,7 @@ class Resource extends Controller
      */
     public function create(): View
     {
-        return View::make('createactivity');
+        return view('activity.createactivity');
     }
 
     /**
@@ -52,7 +51,8 @@ class Resource extends Controller
      */
     public function show(string $id)
     {
-        
+        $activity = Activity::findOrFail($id);
+        return response()->json($activity);
     }
 
     /**
@@ -61,7 +61,7 @@ class Resource extends Controller
     public function edit(string $id)
     {
         $activity = Activity::findOrFail($id); 
-        return view('editActivity', compact('activity'));    }
+        return view('activity.editActivity', compact('activity'));    }
 
     /**
      * Update the specified resource in storage.
